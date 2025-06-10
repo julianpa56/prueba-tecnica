@@ -46,7 +46,7 @@ const ModalWithTable: React.FC<ModalWithTableProps> = ({ isOpen, onClose }) => {
         .then((data: User[]) => {
           setUsers(data);
           setLoading(false);
-          console.log("Usuarios obtenidos:", data);
+          // console.log("Usuarios obtenidos:", data);
         })
         .catch(() => {
           // console.log("Sin usuarios");

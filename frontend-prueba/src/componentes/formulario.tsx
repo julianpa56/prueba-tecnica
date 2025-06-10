@@ -26,10 +26,14 @@ function Formulario() {
             if (res.ok) {
                 successToast()
             } else {
-                errorToast()
+                res.json().then((data) => {
+                    errorToast(data.cause);
+                }).catch(() => {
+                    errorToast("Error desconocido");
+                })
             }
         }).catch(() => {
-            errorToast()
+            errorToast("Error interno del servidor")
         })
     }
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +45,7 @@ function Formulario() {
     }
 
     const successToast = () => toast.success("Usuario registrado correctamente");
-    const errorToast = () => toast.error("Error al registrar el usuario");
+    const errorToast = (message: string) => toast.error(message);
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
     return (
@@ -62,6 +66,8 @@ function Formulario() {
                             value={user.name}
                             onChange={handleChange}
                             placeholder="Julián Peña"
+                            type='text'
+                            required
                         />
                     </div>
                 </div>
@@ -74,6 +80,7 @@ function Formulario() {
                             onChange={handleChange}
                             placeholder="julianpa56@gmail.com"
                             type='email'
+                            required
                         />
                     </div>
                 </div>
