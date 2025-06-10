@@ -12,7 +12,7 @@ export class UsersService {
   saveUser(user: UserDto) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!user.name || !user.email) {
+    if (!user.name?.trim() || !user.email?.trim()) {
       throw new BadRequestException({
         statusCode: 400,
         message: 'Error al guardar el usuario',
